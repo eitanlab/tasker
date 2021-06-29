@@ -5,7 +5,8 @@ const App = () => {
 	const [inputValue, setInputValue] = useState('')
 
 	const addTodoItem = ({content}) => {
-		setTodoItems([...todoItems,{id: todoItems.length + 1, content: content}]);
+		content !== '' && setTodoItems([...todoItems,{id: todoItems.length + 1, content: content}]);
+		setInputValue('');
 	}
 
 	const deleteTodoItem = ({id}) => {
@@ -14,15 +15,8 @@ const App = () => {
 
   return (
     <div className="App">
-      <input 
-				onChange={e => setInputValue(e.target.value)}
-				value={inputValue}
-			></input>
-      <button 
-				onClick={e => addTodoItem({content: inputValue})}
-			>
-				Add Item
-			</button>
+      <input onChange={e => setInputValue(e.target.value)} value={inputValue}></input>
+      <button onClick={e => addTodoItem({content: inputValue})}>Add Item</button>
 			{todoItems.map((item) => 
 			<div key={item.id}>
 				<h2>{item.id}</h2>
